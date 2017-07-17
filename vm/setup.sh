@@ -10,3 +10,8 @@ cd singularity-$VERSION
 ./configure --prefix=/usr/local
 make
 sudo make install
+
+# Setup docker
+groupadd docker
+usermod -aG docker centos
+systemctl enable docker
