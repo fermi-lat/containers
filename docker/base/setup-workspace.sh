@@ -1,13 +1,18 @@
 #!/bin/bash
-product_tag=$1
+tag=$1
 user=$2
 
 # product_tag=20-10-04-gr02
 # user=bvan
 
-product=GlastRelease-scons
+package=GlastRelease
+maybe_scons=""
 
-CVS_RSH=ssh cvs -d :ext:$USER@centaurusa.slac.stanford.edu:/nfs/slac/g/glast/ground/cvs \
-    co -r $product-$product-tag \ 
+if [[ $package == "GlastRelease" ]] || [[ $package == "ScienceTools" ]] ; then 
+    maybe_scons="-scons"
+fi
+
+CVS_RSH=ssh cvs -d :ext:${user}@centaurusa.slac.stanford.edu:/nfs/slac/g/glast/ground/cvs \
+    co -r ${package}-${tag} \
     -d workspace \
-    $product
+    ${package}${maybe_scons}
