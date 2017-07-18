@@ -1,0 +1,25 @@
+yum update && yum install -y curl gcc gcc-c++ freetype-devel \
+   libX11-devel libXt-devel openmotif-devel libXcursor-devel \
+   mesa-libGL-devel libGLU-devel \
+   libXrandr-devel libtiff-devel
+
+    3  yum update && yum install -y curl
+    6  yum install -y curl
+   33  yum install -y gcc gcc-g++ scons
+   36  yum install -y gcc-g++ 
+   37  yum install -y gcc-c++ 
+   72  yum install libfreetype
+   73  yum install libfreetype6
+   75  yum install freetype-devel
+   77  yum install libX11-devel
+   80  yum install Xt
+   81  yum install libXt
+   86  yum install libXt-devel
+   88  yum install libXm-devel
+   89  yum install Xm-devel
+   90  yum install libXm
+   93  yum install -y openmotif-devel
+  101  yum install mesa-libGL-devel
+  110  yum install libXcursor-devel
+  112  yum install -y libXrandr-devel libtiff-devel libGLU-devel
+
