@@ -2,7 +2,9 @@ FROM centos:6
 
 MAINTAINER Joris GUILLOUF <jguillouf@lupm.in2p3.fr>
 
-ARG GR_TAG=20-10-04-gr02
+ARG TAG=20-10-04-gr02
+
+ADD workspace /root/workspace
 
 RUN yum update -y && yum install -y curl gcc gcc-c++ scons \
    freetype-devel libX11-devel libXt-devel openmotif-devel \
@@ -17,6 +19,5 @@ RUN mkdir /root/GLAST_EXT && \
       --versionType RELEASE --version $GR_TAG \
       --variant Optimized --os redhat6-x86_64-64bit-gcc44 \
       -e GLAST_EXT && \
-    cd /root/GlastRelease-scons && \
+    cd /root/workspace && \
     scons --with-GLAST-EXT /root/GLAST_EXT all
-
