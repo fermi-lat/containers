@@ -16,7 +16,7 @@ RUN curl "http://www-glast.stanford.edu/cgi-bin/viewcvs/SCons-installer/src/inst
 
 RUN mkdir /root/GLAST_EXT && \
     python installer.py  -c install -x --package GlastRelease \
-      --versionType RELEASE --version $GR_TAG \
+      --versionType RELEASE --version $TAG \
       --variant Optimized --os redhat6-x86_64-64bit-gcc44 \
       -e GLAST_EXT && \
     cd /root/workspace && \
