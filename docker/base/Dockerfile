@@ -1,4 +1,4 @@
-FROM centos:6
+FROM centos:7
 
 MAINTAINER Joris GUILLOUF <jguillouf@lupm.in2p3.fr>
 
