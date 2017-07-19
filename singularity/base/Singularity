@@ -23,3 +23,5 @@ From:centos:6
         --variant Optimized --os redhat6-x86_64-64bit-gcc44 \
         -e GLAST_EXT && \
     cd /opt/workspace && scons --with-GLAST-EXT /opt/GLAST_EXT all
+
+    chmod 777 /opt/workspace && chmod 777 /opt/workspace/data/Gleam
