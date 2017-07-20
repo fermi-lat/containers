@@ -1,0 +1,22 @@
+BootStrap: yum
+OSVersion: 6
+MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
+Include: yum
+
+Bootstrap:docker
+
+From:centos:6
+
+%labels
+    Maintainer "Joris Guillouf <jguillouf@lupm.in2p3.fr>"
+
+%post
+    yum update -y && yum install -y epel-release
+
+    yum install -y scons \
+        freetype-devel libX11-devel libXt-devel openmotif-devel \
+        libXcursor-devel mesa-libGL-devel libGLU-devel \
+        libXrandr-devel libtiff-devel \
+        xrootd-client
+
+    mkdir -p /software
