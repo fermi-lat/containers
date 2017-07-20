@@ -5,10 +5,11 @@ MAINTAINER Joris GUILLOUF <jguillouf@lupm.in2p3.fr>
 ARG TAG=20-10-04-gr02
 ARG PACKAGE=GlastRelease
 
-RUN yum update -y && yum install -y curl gcc gcc-c++ scons \
+RUN yum update -y && yum install -y epel-release && yum install -y curl gcc gcc-c++ scons \
    freetype-devel libX11-devel libXt-devel openmotif-devel \
    libXcursor-devel mesa-libGL-devel libGLU-devel \
-   libXrandr-devel libtiff-devel
+   libXrandr-devel libtiff-devel \
+   xrootd-client
 
 ADD workspace /root/workspace
 
