@@ -1,10 +1,4 @@
-BootStrap: yum
-OSVersion: 6
-MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
-Include: yum
-
 Bootstrap:docker
-
 From:centos:6
 
 %labels
