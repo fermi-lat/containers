@@ -1,0 +1,47 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<pipeline
+   xmlns="http://glast-ground.slac.stanford.edu/pipeline"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://glast-ground.slac.stanford.edu/pipeline http://glast-ground.slac.stanford.edu/Pipeline-II/schemas/2.0/pipeline.xsd">
+
+  <variables>
+    <var name="PII_CONTAINER">
+      https://glast-ground.slac.stanford.edu/containers/gr-20-10-04-gr02.img
+    </var>
+    <var name="PII_CONTAINER_MOUNTS">/cvmfs/glast.cern.ch/path/to/software:/software</var>    
+    <var name="jobsite">LYON</var>
+    <var name="exec">bash /afs/in2p3.fr/home/g/glastpro/singularity/hello.sh</var>
+    <var name="container_path">/afs/in2p3.fr/home/g/glastpro/singularity/hello.sh</var>
+    <!-- <var name="PIPELINE_CONTAINER">docker://</var> -->
+    <!-- <var name="PIPELINE_CONTAINER">shub://</var> -->    
+  </variables>
+
+  <task name="run-container" version="0.1" type="LYON">
+
+    <process name="run-in-container">
+      <variables>
+	<!--<var name="PII_CONTAINER"></var>-->
+	
+      </variables>
+      <job batchOptions=" -l os=cl7 -q long "
+	   executable="singularity exec ${container_path} -B ${bind_mounts} ${exec}"
+	   jobsite="${jobsite}"
+	   />
+    </process>
+
+    <!--
+    <process name="no-container">
+      <variables>
+	<var name="PII_CONTAINER"></var>
+	
+      </variables>
+      <job batchOptions=" -l os=cl7 -q long "
+	   executable="singularity exec ${container_path} -B ${bind_mounts} ${exec}"
+	   jobsite="${jobsite}"
+	   />
+	   </process>
+    -->
+  </task>
+
+</pipeline>
+
