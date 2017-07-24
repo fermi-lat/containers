@@ -5,14 +5,14 @@
    xsi:schemaLocation="http://glast-ground.slac.stanford.edu/pipeline http://glast-ground.slac.stanford.edu/Pipeline-II/schemas/2.0/pipeline.xsd">
 
   <variables>
-    <var name="SLAC_CONTAINER_MOUNTS">/afs/slac/g/glast/ground/software/redhat6-x86_64-64bit-gcc44</var>
-    <var name="LYON_CONTAINER_MOUNTS">/cvmfs/glast.cern.ch/path/to/software/redhat6-x86_64-64bit-gcc44</var>
+    <var name="SLAC_CONTAINER_MOUNTS">-B /afs/slac/g/glast/ground/software/redhat6-x86_64-64bit-gcc44:/software -B /afs:/afs</var>
+    <var name="LYON_CONTAINER_MOUNTS">-B /cvmfs/glast.cern.ch/path/to/software/redhat6-x86_64-64bit-gcc44:/software</var>
     <var name="SLAC_BATCH_OPTIONS"> -q rhel7 </var>
     <var name="LYON_BATCH_OPTIONS"> -l os=cl7 -q long </var>
     <var name="SLAC_EXECUTABLE">bash /afs/slac/g/glast/singularity/hello.sh</var>
     <var name="LYON_EXECUTABLE">bash /afs/in2p3.fr/home/g/glastpro/singularity/hello.sh</var>
 
-    <var name="bind_mounts">${SLAC_CONTAINER_MOUNTS}:/software</var>
+    <var name="bind_mounts">${SLAC_CONTAINER_MOUNTS}</var>
     <var name="container">shub://fermi-lat/containers:master</var>
     <!-- <var name="PII_CONTAINER">docker://</var> -->
     <!-- <var name="PII_CONTAINER">shub://</var> -->
