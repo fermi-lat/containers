@@ -2,38 +2,37 @@
 <pipeline
    xmlns="http://glast-ground.slac.stanford.edu/pipeline"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://glast-ground.slac.stanford.edu/pipeline http://glast-ground.slac.stanford.edu/Pipeline-II/schemas/2.0/pipeline.xsd">
+   xsi:schemaLocation="http://glast-ground.slac.stanford.edu/pipeline http://glast-ground.slac.stanford.edu/Pipeline-II/schemas/2.1/pipeline.xsd">
 
-  <variables>
-    <var name="SLAC_CONTAINER_MOUNTS">-B /afs/slac/g/glast/ground/software/redhat6-x86_64-64bit-gcc44:/software -B /afs:/afs</var>
-    <var name="LYON_CONTAINER_MOUNTS">-B /cvmfs/glast.cern.ch/path/to/software/redhat6-x86_64-64bit-gcc44:/software</var>
-    <var name="SLAC_BATCH_OPTIONS"> -q rhel7 </var>
-    <var name="LYON_BATCH_OPTIONS"> -l os=cl7 -q long </var>
-    <var name="SLAC_EXECUTABLE">bash /afs/slac/g/glast/singularity/hello.sh</var>
-    <var name="LYON_EXECUTABLE">bash /afs/in2p3.fr/home/g/glastpro/singularity/hello.sh</var>
+  <task name="run-container" version="0.4" type="LYON">
 
-    <var name="bind_mounts">${SLAC_CONTAINER_MOUNTS}</var>
-    <var name="container">shub://fermi-lat/containers:master</var>
-    <!-- <var name="PII_CONTAINER">docker://</var> -->
-    <!-- <var name="PII_CONTAINER">shub://</var> -->
-    <!-- <var name="PII_CONTAINER">
-      https://glast-ground.slac.stanford.edu/containers/fermi-lat/gr-20-10-04-gr02.img
-    </var> -->
+    <variables>
+      <var name="SLAC_CONTAINER_MOUNTS">-B /afs/slac/g/glast/ground/software/redhat6-x86_64-64bit-gcc44:/software -B /afs:/afs</var>
+      <var name="LYON_CONTAINER_MOUNTS">-B /cvmfs/glast.cern.ch/path/to/software/redhat6-x86_64-64bit-gcc44:/software</var>
+      <var name="SLAC_BATCH_OPTIONS"> -q rhel7 </var>
+      <var name="LYON_BATCH_OPTIONS"> -l os=cl7 -q long </var>
+      <var name="SLAC_EXECUTABLE">bash /afs/slac/g/glast/singularity/hello.sh</var>
+      <var name="LYON_EXECUTABLE">bash /afs/in2p3.fr/home/g/glastpro/singularity/hello.sh</var>
 
-    <var name="jobsite">SLAC</var>
-    <var name="jobsite_options">${SLAC_BATCH_OPTIONS}</var>
-    <var name="exec">${SLAC_EXECUTABLE}</var>
-  </variables>
+      <var name="bind_mounts">${SLAC_CONTAINER_MOUNTS}</var>
+      <var name="container">shub://fermi-lat/containers:master</var>
+      <!-- <var name="PII_CONTAINER">docker://</var> -->
+      <!-- <var name="PII_CONTAINER">shub://</var> -->
+      <!-- <var name="PII_CONTAINER">
+        https://glast-ground.slac.stanford.edu/containers/fermi-lat/gr-20-10-04-gr02.img
+      </var> -->
 
-  <task name="run-container" version="0.1" type="LYON">
+      <var name="jobsite">SLAC</var>
+      <var name="jobsite_options">${SLAC_BATCH_OPTIONS}</var>
+      <var name="exec">${SLAC_EXECUTABLE}</var>
+    </variables>
 
-    <process name="run-in-container">
-      <variables>
-	       <!--<var name="PII_CONTAINER"></var>-->
-      </variables>
+    <process name="run-in-container" site="${jobsite}">
+      <!--<variables>
+	       <var name="PII_CONTAINER"></var>
+      </variables>-->
       <job batchOptions="${jobsite_options}"
-        executable="singularity exec -B ${bind_mounts} ${container} ${exec}"
-        jobsite="${jobsite}"
+        executable="/opt/singularity/bin/singularity exec ${bind_mounts} ${container} ${exec}"
 	   />
     </process>
 
