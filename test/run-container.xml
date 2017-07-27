@@ -4,43 +4,58 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://glast-ground.slac.stanford.edu/pipeline http://glast-ground.slac.stanford.edu/Pipeline-II/schemas/2.1/pipeline.xsd">
 
-  <task name="run-container" version="0.5" type="LYON">
+  <task name="run-container" version="0.7" type="LYON">
 
     <variables>
       <var name="SLAC_CONTAINER_MOUNTS">-B /afs/slac/g/glast/ground/software/redhat6-x86_64-64bit-gcc44:/software -B /afs:/afs</var>
-      <var name="LYON_CONTAINER_MOUNTS">-B /cvmfs/glast.cern.ch/path/to/software/redhat6-x86_64-64bit-gcc44:/software</var>
+      <var name="CVMFS_CONTAINER_MOUNTS">-B /cvmfs/glast.cern.ch/redhat6-x86_64-64bit-gcc44:/software</var>
       <var name="SLAC_BATCH_OPTIONS"> -q rhel7 </var>
       <var name="LYON_BATCH_OPTIONS"> -l os=cl7 -q long </var>
       <var name="SLAC_EXECUTABLE">bash /afs/slac/g/glast/singularity/hello.sh</var>
       <var name="LYON_EXECUTABLE">bash /afs/in2p3.fr/home/g/glastpro/singularity/hello.sh</var>
+      <var name="CVMFS_CONTAINER">/cvmfs/glast.cern.ch/redhat6-x86_64-64bit-gcc44/containers/fermi-lat-containers-master.img</var>
+      <var name="SHUB_CONTAINER">shub://fermi-lat/containers:master</var>
 
       <var name="bind_mounts">${SLAC_CONTAINER_MOUNTS}</var>
-      <var name="container">shub://fermi-lat/containers:master</var>
       <var name="jobsite">SLAC</var>
       <var name="jobsite_options">${SLAC_BATCH_OPTIONS}</var>
       <var name="exec">${SLAC_EXECUTABLE}</var>
     </variables>
 
-    <process name="run-in-container-explicit" site="${jobsite}">
-      <!--<variables>
-	       <var name="PII_CONTAINER"></var>
-      </variables>-->
+    <process name="container-explicit" site="${jobsite}">
+      <var name="container">${SHUB_CONTAINER}</var>
       <job batchOptions="${jobsite_options}"
         executable="/opt/singularity/bin/singularity exec ${bind_mounts} ${container} ${exec}"
 	   />
     </process>
 
-    <process name="run-in-container-implicit" site="SLACMC">
+    <process name="container-implicit-shub" site="SLACMC">
       <variables>
          <var name="PIPELINE_CONTAINER_BIN">/opt/singularity/bin/singularity</var>
          <var name="PIPELINE_CONTAINER_BIND">${bind_mounts}</var>
-         <var name="PIPELINE_CONTAINER">${container}</var>
+         <var name="PIPELINE_CONTAINER">${SHUB_CONTAINER}</var>
       </variables>
       <job batchOptions="${jobsite_options}"
         executable="${exec}"
 	   />
     </process>
 
+    <process name="container-implicit-cvmfs" site="SLACMC">
+      <variables>
+         <var name="PIPELINE_CONTAINER_BIN">/opt/singularity/bin/singularity</var>
+         <var name="PIPELINE_CONTAINER_BIND">${bind_mounts}</var>
+         <var name="PIPELINE_CONTAINER">${CVMFS_CONTAINER}</var>
+      </variables>
+      <job batchOptions="${jobsite_options}"
+        executable="${exec}"
+	   />
+    </process>
+
+    <process name="no-container" site="SLACMC">
+      <job batchOptions="${jobsite_options}"
+        executable="${exec}"
+	   />
+    </process>
 
     <!--
     <process name="no-container">
