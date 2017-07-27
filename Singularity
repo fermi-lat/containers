@@ -8,6 +8,7 @@ From:centos:6
     yum update -y && yum install -y epel-release
 
     yum install -y scons \
+        time sendmail \
         freetype-devel libX11-devel libXt-devel openmotif-devel \
         libXcursor-devel mesa-libGL-devel libGLU-devel \
         libXrandr-devel libtiff-devel \
