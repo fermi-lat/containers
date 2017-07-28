@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<pipeline
+   xmlns="http://glast-ground.slac.stanford.edu/pipeline"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://glast-ground.slac.stanford.edu/pipeline http://glast-ground.slac.stanford.edu/Pipeline-II/schemas/2.1/pipeline.xsd">
+
+  <task name="run-centos7-lyon" version="0.6" type="LYON">
+
+    <process name="container-implicit-cvmfs-lyon" site="LYONGRID">
+      <variables>
+         <var name="PIPELINE_CONTAINER">/cvmfs/singularity.in2p3.fr/images/official/cc-sl6</var>
+         <var name="PIPELINE_CONTAINER_BIND">-B /sps:/sps</var>
+      </variables>
+      <job batchOptions=" -l os=cl7 -q long ">
+#!/bin/bash
+echo -e `ls`
+pwd
+echo -e "\nDone."
+printf "Hello world\n"
+      </job>
+    </process>
+  </task>
+</pipeline>

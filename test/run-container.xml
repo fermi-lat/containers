@@ -4,11 +4,12 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://glast-ground.slac.stanford.edu/pipeline http://glast-ground.slac.stanford.edu/Pipeline-II/schemas/2.1/pipeline.xsd">
 
-  <task name="run-container" version="0.7" type="LYON">
+  <task name="run-container" version="0.10" type="LYON">
 
     <variables>
       <var name="SLAC_CONTAINER_MOUNTS">-B /afs/slac/g/glast/ground/software/redhat6-x86_64-64bit-gcc44:/software -B /afs:/afs</var>
-      <var name="CVMFS_CONTAINER_MOUNTS">-B /cvmfs/glast.cern.ch/redhat6-x86_64-64bit-gcc44:/software</var>
+      <!-- Note: In the following var, -B /afs:/afs is needed for P2_SENDMAIL script -->
+      <var name="CVMFS_CONTAINER_MOUNTS">-B /cvmfs/glast.cern.ch/redhat6-x86_64-64bit-gcc44:/software -B /afs:/afs</var>
       <var name="SLAC_BATCH_OPTIONS"> -q rhel7 </var>
       <var name="LYON_BATCH_OPTIONS"> -l os=cl7 -q long </var>
       <var name="SLAC_EXECUTABLE">bash /afs/slac/g/glast/singularity/hello.sh</var>
@@ -23,7 +24,9 @@
     </variables>
 
     <process name="container-explicit" site="${jobsite}">
-      <var name="container">${SHUB_CONTAINER}</var>
+      <variables>
+        <var name="container">${SHUB_CONTAINER}</var>
+      </variables>
       <job batchOptions="${jobsite_options}"
         executable="/opt/singularity/bin/singularity exec ${bind_mounts} ${container} ${exec}"
 	   />
@@ -43,8 +46,20 @@
     <process name="container-implicit-cvmfs" site="SLACMC">
       <variables>
          <var name="PIPELINE_CONTAINER_BIN">/opt/singularity/bin/singularity</var>
-         <var name="PIPELINE_CONTAINER_BIND">${bind_mounts}</var>
+         <var name="PIPELINE_CONTAINER_BIND">${CVMFS_CONTAINER_MOUNTS}</var>
          <var name="PIPELINE_CONTAINER">${CVMFS_CONTAINER}</var>
+      </variables>
+      <job batchOptions="${jobsite_options}"
+        executable="${exec}"
+	   />
+    </process>
+
+    <process name="container-implicit-cvmfs-lyon" site="LYONGRID">
+      <variables>
+         <var name="PIPELINE_CONTAINER_BIND">${CVMFS_CONTAINER_MOUNTS}</var>
+         <var name="PIPELINE_CONTAINER">${CVMFS_CONTAINER}</var>
+         <var name="exec">${LYON_EXECUTABLE}</var>
+         <var name="jobsite_options">${LYON_BATCH_OPTIONS}</var>
       </variables>
       <job batchOptions="${jobsite_options}"
         executable="${exec}"
