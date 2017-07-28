@@ -1,0 +1,33 @@
+Bootstrap:docker
+From:fermipy/fermist:latest
+
+%labels
+    Maintainer "Joris Guillouf <jguillouf@lupm.in2p3.fr>"
+
+%environment
+
+PATH=/opt/conda/bin:$PATH
+INST_DIR=/home/ScienceTools
+GLAST_EXT=/home/externals
+FERMI_DIFFUSE_DIR=/home/externals/diffuseModels/v5r0
+SLAC_ST_BUILD=true
+MATPLOTLIBRC=/home/matplotlib
+
+%post
+
+    curl -o miniconda.sh -L http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+    /bin/bash miniconda.sh -b -p /opt/conda
+    rm miniconda.sh
+    /opt/conda/bin/conda update -y conda
+    /opt/conda/bin/conda config --append channels conda-forge
+
+    /opt/conda/bin/conda install -y python=2.7 pip numpy astropy pytest
+    /opt/conda/bin/conda install -y scipy matplotlib pyyaml ipython jupyter pandas
+    /opt/conda/bin/conda install -y wcsaxes healpy subprocess32
+    /opt/conda/bin/conda install -y fermipy
+
+    mkdir /workdir
+
+    echo "source /home/ScienceTools/bin/redhat6-x86_64-64bit-gcc44-Optimized/_setup.sh" >> /root/.bashrc
+    mkdir /home/matplotlib
+    echo "backend      : Agg" >> /home/matplotlib/matplotlibrc
