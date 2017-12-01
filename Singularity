@@ -14,4 +14,4 @@ From:centos:6
         libXrandr-devel libtiff-devel \
         xrootd-client
 
-    mkdir -p /software
+    mkdir -p /{software,afs,sps,scratch}
