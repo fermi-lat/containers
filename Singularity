@@ -12,6 +12,9 @@ From:centos:6
         freetype-devel libX11-devel libXt-devel openmotif-devel \
         libXcursor-devel mesa-libGL-devel libGLU-devel \
         libXrandr-devel libtiff-devel \
+        glibc.i686 \
         xrootd-client
 
     mkdir -p /{software,afs,sps,scratch}
+
+    chmod 2755 /usr/sbin/sendmail.sendmail
