@@ -9,7 +9,7 @@ From:centos:6
 
     yum install -y scons \
         time sendmail \
-        freetype-devel libX11-devel libXt-devel openmotif-devel \
+        freetype-devel libX11-devel libXt-devel openmotif-devel openmotif-devel.i386\
         libXcursor-devel mesa-libGL-devel libGLU-devel \
         libXrandr-devel libtiff-devel \
         glibc.i686 \
