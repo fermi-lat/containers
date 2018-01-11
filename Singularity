@@ -9,10 +9,10 @@ From:centos:6
 
     yum install -y scons \
         time sendmail \
-        freetype-devel libX11-devel libXt-devel openmotif-devel openmotif-devel.i686\
+        freetype-devel libX11-devel libXt-devel openmotif-devel openmotif-devel.i686 \
         libXcursor-devel mesa-libGL-devel libGLU-devel \
         libXrandr-devel libtiff-devel \
-        glibc.i686 \
+        glibc.i686 libstdc++.i686\
         xrootd-client
 
     mkdir -p /{software,afs,sps,scratch}
