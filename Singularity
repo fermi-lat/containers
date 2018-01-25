@@ -13,7 +13,8 @@ From:centos:6
         libXcursor-devel mesa-libGL-devel libGLU-devel \
         libXrandr-devel libtiff-devel \
         glibc.i686 libstdc++.i686\
-        xrootd-client
+        xrootd-client \
+        openssl098e
 
     mkdir -p /{software,afs,sps,scratch}
 
