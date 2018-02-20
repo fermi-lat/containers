@@ -8,7 +8,7 @@ From:centos:6
     yum update -y && yum install -y epel-release
 
     yum install -y scons \
-        time sendmail \
+        time \
         freetype-devel libX11-devel libXt-devel openmotif-devel openmotif-devel.i686 \
         libXcursor-devel mesa-libGL-devel libGLU-devel \
         libXrandr-devel libtiff-devel \
@@ -18,4 +18,9 @@ From:centos:6
 
     mkdir -p /{software,afs,sps,scratch}
 
-    chmod 2755 /usr/sbin/sendmail.sendmail
+%files
+    bin/bridge.sh /opt
+
+%environment
+    P2_SENDMAIL=/opt/bridge.sh
+    export P2_SENDMAIL 
