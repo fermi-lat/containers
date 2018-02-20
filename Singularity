@@ -17,6 +17,7 @@ From:centos:6
         openssl098e
 
     mkdir -p /{software,afs,sps,scratch}
+    mkdir -p /var/spool/sge
 
 %files
     bin/bridge.sh /opt
