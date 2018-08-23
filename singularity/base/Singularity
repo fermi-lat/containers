@@ -29,3 +29,4 @@ From:centos:6
     cd /opt/workspace && scons --with-GLAST-EXT /opt/GLAST_EXT all
 
     chmod 777 /opt/workspace && chmod 777 /opt/workspace/data/Gleam
+
