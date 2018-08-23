@@ -1,1 +1,15 @@
-../../yum_requirements.centos6-x86_64.txt
+curl
+gcc
+gcc-c++
+freetype-devel
+libX11-devel
+libXt-devel
+openmotif-devel
+libXcursor-devel
+mesa-libGL-devel
+libGLU-devel
+libXrandr-devel
+libtiff-devel
+libicu-devel
+xrootd-client
+
