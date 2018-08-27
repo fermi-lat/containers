@@ -14,7 +14,7 @@ From:centos:6
         libXrandr-devel libtiff-devel \
         glibc.i686 libstdc++.i686\
         xrootd-client \
-        openssl098e
+        openmotif-devel.i686 glibc.i686 libstdc++.i686 openssl098e.i686 # Packages for old MC Simulations with GR 32bits
 
     mkdir -p /{software,afs,sps,scratch}
     mkdir -p /var/spool/sge
