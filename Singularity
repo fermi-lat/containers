@@ -9,12 +9,11 @@ From:centos:6
 
     yum install -y scons \
         time \
-        freetype-devel libX11-devel libXt-devel openmotif-devel openmotif-devel.i686 \
+        freetype-devel libX11-devel libXt-devel openmotif-devel \
         libXcursor-devel mesa-libGL-devel libGLU-devel \
         libXrandr-devel libtiff-devel \
-        glibc.i686 libstdc++.i686\
         xrootd-client \
-        openmotif-devel.i686 glibc.i686 libstdc++.i686 openssl098e.i686 # Packages for old MC Simulations with GR 32bits
+        openssl098e.i686 # For old MC Simulations with GR 32bits
 
     mkdir -p /{software,afs,sps,scratch}
     mkdir -p /var/spool/sge
