@@ -2,7 +2,10 @@
 yum update -q -e 0 -y 2&> /dev/null && \
    yum install -q -e 0 -y  --setopt=tsflags='' epel-release centos-release-scl-rh python-setuptools 1>&2  && \
    yum install -q -e 0 -y  --setopt=tsflags='' $@ 1>&2
-easy_install jinja2 1>&2
+
+yum install -q -e 0 -y  --setopt=tsflags='' python-pip 1>&2
+curl -qLO https://files.pythonhosted.org/packages/08/b9/cefc15a27d9315b5d83a8010c1b19d4dcad1c68c99e0c38d704ce37f9e9d/Jinja2-2.3.tar.gz
+pip install Jinja2-2.3.tar.gz 1>&2
 
 cat >> env.py <<EOF
 import os, subprocess as sp, json, sys

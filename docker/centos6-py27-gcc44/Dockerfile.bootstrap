@@ -1,3 +1,4 @@
-FROM centos:6
+FROM fermilat/centos:6
+ADD root/ /
 COPY bootstrap.sh /
 COPY Dockerfile.template /

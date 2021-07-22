@@ -1,6 +1,7 @@
-FROM centos:6
+FROM fermilat/centos:6
 
 LABEL maintainer="bvan@slac.stanford.edu"
+ADD root/ /
 COPY yum_requirements.txt .
 RUN yum update -y && \
    yum install -y  --setopt=tsflags='' epel-release centos-release-scl-rh && \
@@ -27,4 +28,5 @@ RUN mkdir /home/centos/.ssh && ssh-keyscan -t rsa github.com >> /home/centos/.ss
 ENV PATH=/home/centos/.local/bin:$PATH
 
 USER centos
+RUN pip install fermi-repoman gitpython==2.* numpy==1.16.* click==6.*
 WORKDIR /home/centos
