@@ -12,4 +12,4 @@ libXrandr-devel
 libtiff-devel
 libicu-devel
 xrootd-client
-
+cmake
