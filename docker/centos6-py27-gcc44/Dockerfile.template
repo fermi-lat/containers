@@ -28,5 +28,5 @@ RUN mkdir /home/centos/.ssh && ssh-keyscan -t rsa github.com >> /home/centos/.ss
 ENV PATH=/home/centos/.local/bin:$PATH
 
 USER centos
-RUN pip install fermi-repoman gitpython==2.* numpy==1.16.* click==6.*
+RUN pip install fermi-repoman gitpython==2.* numpy==1.16.* click==6.* smmap==4.*
 WORKDIR /home/centos
